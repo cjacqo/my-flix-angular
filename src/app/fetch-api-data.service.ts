@@ -140,7 +140,7 @@ export class FetchApiDataService {
     )
   }
 
-  addFavoriteMovie(movieId: string): Observable<any> {
+  addFavoriteMovie(userName: string, movieId: string): Observable<any> {
     const token = localStorage.getItem('token')
     const user = JSON.parse(localStorage.getItem('user') || '{}')
 
@@ -160,7 +160,7 @@ export class FetchApiDataService {
     )
   }
 
-  deleteFavoriteMovie(movieId: string): Observable<any> {
+  deleteFavoriteMovie(userName: string, movieId: string): Observable<any> {
     const token = localStorage.getItem('token')
     const user = JSON.parse(localStorage.getItem('user') || '{}')
 

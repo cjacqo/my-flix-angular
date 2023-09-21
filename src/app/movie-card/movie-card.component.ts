@@ -14,7 +14,7 @@ export class MovieCardComponent implements OnInit {
   directors: any[] = []
   genres: any[] = []
   movies: any[] = []
-  userName: any | undefined
+  user: any | undefined
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -27,7 +27,8 @@ export class MovieCardComponent implements OnInit {
       this.fetchDirectors()
       this.fetchMovies()
       this.fetchGenres()
-      this.userName = localStorage.getItem('user')
+      this.user = JSON.parse(localStorage.getItem('user')!)
+      console.log(this.user)
     } else {
       this.router.navigate(['welcome'])
     }
@@ -114,10 +115,22 @@ export class MovieCardComponent implements OnInit {
     this.dialog.open(InfoDialogBasicComponent, dialogConfig)
   }
 
-  handleSetFavorite(movieId: string): void {
-    if (this.userName.FavoriteMovies.includes(movieId)) {
+  handleSetFavoriteMovie(movieId: string): void {
+    console.log(this.user.FavoriteMovies)
+    if (this.user.FavoriteMovies.includes(movieId)) {
       this.fetchApiData
-        .deleteFavoriteMovie(this.userName)
+        .deleteFavoriteMovie(this.user.UserName, movieId)
+        .subscribe((resp: any) => {
+          this.user.FavoriteMovies = resp
+          localStorage.setItem('user', JSON.stringify(this.user))
+        })
+    } else {
+      this.fetchApiData
+        .addFavoriteMovie(this.user.UserName, movieId)
+        .subscribe((resp: any) => {
+          this.user.FavoriteMovies = resp
+          localStorage.setItem('user', JSON.stringify(this.user))
+        })
     }
   }
 }
