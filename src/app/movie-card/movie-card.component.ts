@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { GenreDetailsComponent } from '../genre-details/genre-details.component';
 import { Router } from '@angular/router';
+import { InfoDialogComponent } from '../info-dialog/info-dialog.component';
 
 @Component({
   selector: 'app-movie-card',
@@ -84,8 +84,7 @@ export class MovieCardComponent implements OnInit {
       dialogTitle: genre.Name,
       dialogContent: genre.Description
     }
-    this.dialog.open(GenreDetailsComponent, {
-      width: '500px'
-    })
+    dialogConfig.width = '500px'
+    this.dialog.open(InfoDialogComponent, dialogConfig)
   }
 }
