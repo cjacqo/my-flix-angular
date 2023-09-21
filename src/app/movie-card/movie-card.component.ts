@@ -99,4 +99,15 @@ export class MovieCardComponent implements OnInit {
     dialogConfig.width = '500px'
     this.dialog.open(InfoDialogComponent, dialogConfig)
   }
+
+  openSynopsisDialog(description: any): void {
+    this.dialog.closeAll()
+    const dialogConfig = new MatDialogConfig()
+    dialogConfig.data = {
+      dialogTitle: 'Synopsis',
+      dialogContent: description
+    }
+    dialogConfig.width = '500px'
+    this.dialog.open(InfoDialogComponent, dialogConfig)
+  }
 }
