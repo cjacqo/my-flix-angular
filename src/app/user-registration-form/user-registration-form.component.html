@@ -6,56 +6,42 @@
 
   <mat-card-content>
     <form>
-      <!-- UserName Input -->
+      <!-- FirstName Input -->
       <mat-form-field>
-        <input
-          matInput
-          [(ngModel)]='userData.UserName'
-          placeholder='Username'
-          type='text'
-          name='UserName'
+        <input matInput [(ngModel)]="userData.FirstName" placeholder="Firstname" type='text' name="FirstName"
           required />
       </mat-form-field>
-      
+
+      <!-- LastName Input -->
+      <mat-form-field>
+        <input matInput [(ngModel)]="userData.LastName" placeholder="Lastname" type="text" name="LastName" required />
+      </mat-form-field>
+
+      <!-- UserName Input -->
+      <mat-form-field>
+        <input matInput [(ngModel)]="userData.UserName" placeholder="Username" type="text" name="UserName" required />
+      </mat-form-field>
+
       <!-- Password Input -->
       <mat-form-field>
-        <input
-          matInput
-          [(ngModel)]='userData.Password'
-          placeholder='Password'
-          type='password'
-          name="Password"
+        <input matInput [(ngModel)]="userData.Password" placeholder="Password" type="password" name="Password"
           required />
       </mat-form-field>
 
       <!-- Email Input -->
       <mat-form-field>
-        <input
-          matInput
-          [(ngModel)]='userData.Email'
-          placeholder='Email'
-          type='email'
-          name='Email'
-          required />
+        <input matInput [(ngModel)]="userData.Email" placeholder="Email" type="email" name="Email" required />
       </mat-form-field>
 
       <!-- Birthday Input -->
       <mat-form-field>
-        <input
-          matInput
-          [(ngModel)]='userData.Birthday'
-          placeholder='Birthday'
-          type='date'
-          name='Birthday' />
+        <input matInput [(ngModel)]="userData.Birthday" placeholder="Birthday" type="date" name="Birthday" />
       </mat-form-field>
     </form>
   </mat-card-content>
 
   <mat-card-actions>
-    <button
-      mat-raised-button
-      (click)='registerUser()'
-      color='primary'>
+    <button mat-raised-button (click)="registerUser()" color="primary">
       Sign Up
     </button>
   </mat-card-actions>
