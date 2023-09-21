@@ -9,12 +9,14 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 export class MovieCardComponent {
   directors: any[] = []
   movies: any[] = []
+  userName: any | undefined
 
   constructor(public fetchApiData: FetchApiDataService) { }
 
   ngOnInit(): void {
     this.fetchDirectors()
     this.fetchMovies()
+    this.userName = localStorage.getItem('user')
   }
 
   fetchMovies(): void {
