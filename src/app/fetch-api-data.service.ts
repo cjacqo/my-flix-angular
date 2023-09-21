@@ -142,20 +142,13 @@ export class FetchApiDataService {
 
   addFavoriteMovie(userName: string, movieId: string): Observable<any> {
     const token = localStorage.getItem('token')
-    const user = JSON.parse(localStorage.getItem('user') || '{}')
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + token
+    })
 
-    user.FavoriteMovies.push(movieId)
-    localStorage.setItem('user', JSON.stringify(user))
-
-    return this.http.put(apiUrl + `users/${user.UserName}/${movieId}`, {}, {
-      headers: new HttpHeaders(
-        {
-          "Content-Type": 'application/json',
-          Authorization: 'Bearer ' + token
-        }
-      )
+    return this.http.post(apiUrl + 'users/' + userName + '/movies/' + movieId, null, {
+      headers
     }).pipe(
-      map(this.extractResponseData),
       catchError(this.handleError)
     )
   }

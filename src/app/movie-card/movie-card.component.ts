@@ -116,7 +116,6 @@ export class MovieCardComponent implements OnInit {
   }
 
   handleSetFavoriteMovie(movieId: string): void {
-    console.log(this.user.FavoriteMovies)
     if (this.user.FavoriteMovies.includes(movieId)) {
       this.fetchApiData
         .deleteFavoriteMovie(this.user.UserName, movieId)
