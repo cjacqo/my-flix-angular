@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { GenreDetailsComponent } from '../genre-details/genre-details.component';
 
 @Component({
@@ -63,7 +63,6 @@ export class MovieCardComponent implements OnInit {
     let foundGenre: any
     foundGenre = this.genres.find(g => g._id === movie.Genre)
     movie.Genre = foundGenre
-    console.log(movie)
   }
 
   listDirectors(directors: any) {
@@ -72,7 +71,13 @@ export class MovieCardComponent implements OnInit {
     })
   }
 
-  openGenreDialog(): void {
+  openGenreDialog(genre: any): void {
+    this.dialog.closeAll()
+    const dialogConfig = new MatDialogConfig()
+    dialogConfig.data = {
+      dialogTitle: genre.Name,
+      dialogContent: genre.Description
+    }
     this.dialog.open(GenreDetailsComponent, {
       width: '500px'
     })
