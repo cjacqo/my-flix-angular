@@ -113,4 +113,11 @@ export class MovieCardComponent implements OnInit {
     dialogConfig.width = '500px'
     this.dialog.open(InfoDialogBasicComponent, dialogConfig)
   }
+
+  handleSetFavorite(movieId: string): void {
+    if (this.userName.FavoriteMovies.includes(movieId)) {
+      this.fetchApiData
+        .deleteFavoriteMovie(this.userName)
+    }
+  }
 }
