@@ -1,4 +1,9 @@
-.movie-card--container {
+.nav-bar {
+  position: sticky;
+}
+
+.movie-card--container,
+.nav-bar {
   display: flex;
   margin: 1rem;
 }
