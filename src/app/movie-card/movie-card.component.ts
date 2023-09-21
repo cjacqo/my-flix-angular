@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
+import { MatDialog } from '@angular/material/dialog';
+import { GenreDetailsComponent } from '../genre-details/genre-details.component';
 
 @Component({
   selector: 'app-movie-card',
@@ -8,22 +10,28 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 })
 export class MovieCardComponent implements OnInit {
   directors: any[] = []
+  genres: any[] = []
   movies: any[] = []
   userName: any | undefined
 
-  constructor(public fetchApiData: FetchApiDataService) { }
+  constructor(
+    public fetchApiData: FetchApiDataService,
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.fetchDirectors()
     this.fetchMovies()
+    this.fetchGenres()
     this.userName = localStorage.getItem('user')
   }
 
   fetchMovies(): void {
-    this.fetchApiData.getAllMoviesTEST().subscribe((resp: any) => {
+    this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp
       for (const movie of this.movies) {
         this.findMoviesDirectors(movie)
+        this.findMoviesGenre(movie)
       }
       return this.movies
     })
@@ -36,6 +44,13 @@ export class MovieCardComponent implements OnInit {
     })
   }
 
+  fetchGenres(): void {
+    this.fetchApiData.getAllGenres().subscribe((resp: any) => {
+      this.genres = resp
+      return this.genres
+    })
+  }
+
   private findMoviesDirectors(movie: any): void {
     let foundDirectors: any[] = []
     movie.Directors.forEach((director: any) => {
@@ -44,9 +59,22 @@ export class MovieCardComponent implements OnInit {
     movie.Directors = foundDirectors
   }
 
+  private findMoviesGenre(movie: any): void {
+    let foundGenre: any
+    foundGenre = this.genres.find(g => g._id === movie.Genre)
+    movie.Genre = foundGenre
+    console.log(movie)
+  }
+
   listDirectors(directors: any) {
     return directors.map((director: any) => {
       return director.Name
+    })
+  }
+
+  openGenreDialog(): void {
+    this.dialog.open(GenreDetailsComponent, {
+      width: '500px'
     })
   }
 }

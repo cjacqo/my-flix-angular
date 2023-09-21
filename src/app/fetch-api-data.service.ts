@@ -37,24 +37,6 @@ export class FetchApiDataService {
     )
   }
 
-  getAllMoviesTEST(): Observable<any> {
-    const token = localStorage.getItem('token')
-    return this.http.get(apiUrl + 'movies', {
-      headers: new HttpHeaders(
-        { Authorization: 'Bearer ' + token }
-      )
-    }).pipe(
-      map(this.extractResponseData)
-      // map((data: any) => {
-      //   data.forEach((m: any, i: number) => {
-      //     console.log(m.Directors)
-      //     console.log(i)
-      //   })
-      //   return data
-      // })
-    )
-  }
-
   getOneMovie(title: string): Observable<any> {
     const token = localStorage.getItem('token')
     return this.http.get(apiUrl + 'movies/' + title, {
@@ -94,6 +76,18 @@ export class FetchApiDataService {
   getOneGenre(genreName: string): Observable<any> {
     const token = localStorage.getItem('token')
     return this.http.get(apiUrl + 'movies/genre/' + genreName, {
+      headers: new HttpHeaders(
+        { Authorization: 'Bearer ' + token }
+      )
+    }).pipe(
+      map(this.extractResponseData),
+      catchError(this.handleError)
+    )
+  }
+
+  getAllGenres(): Observable<any> {
+    const token = localStorage.getItem('token')
+    return this.http.get(apiUrl + 'genres', {
       headers: new HttpHeaders(
         { Authorization: 'Bearer ' + token }
       )
