@@ -3,6 +3,7 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { InfoDialogComponent } from '../info-dialog/info-dialog.component';
+import { InfoDialogBasicComponent } from '../info-dialog-basic/info-dialog-basic.component';
 
 @Component({
   selector: 'app-movie-card',
@@ -85,16 +86,18 @@ export class MovieCardComponent implements OnInit {
       dialogContent: genre.Description
     }
     dialogConfig.width = '500px'
-    this.dialog.open(InfoDialogComponent, dialogConfig)
+    this.dialog.open(InfoDialogBasicComponent, dialogConfig)
   }
 
   openDirectorsDialog(directors: any): void {
     this.dialog.closeAll()
     console.log(directors)
     const dialogConfig = new MatDialogConfig()
+    const directorNames = directors.map((director: any) => director.Name)
+    const directorBios = directors.map((director: any) => director.Bio)
     dialogConfig.data = {
-      dialogTitle: directors[0].Name,
-      dialogContent: 'test'
+      dialogTitle: directorNames,
+      dialogContent: directorBios
     }
     dialogConfig.width = '500px'
     this.dialog.open(InfoDialogComponent, dialogConfig)
@@ -108,6 +111,6 @@ export class MovieCardComponent implements OnInit {
       dialogContent: description
     }
     dialogConfig.width = '500px'
-    this.dialog.open(InfoDialogComponent, dialogConfig)
+    this.dialog.open(InfoDialogBasicComponent, dialogConfig)
   }
 }
