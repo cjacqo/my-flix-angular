@@ -23,4 +23,9 @@ export class NavbarComponent implements OnInit {
   navigateToUserProfile() {
     this.router.navigate(['user-profile'])
   }
+
+  logout() {
+    localStorage.clear()
+    this.router.navigate(['welcome'])
+  }
 }
