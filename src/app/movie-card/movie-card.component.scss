@@ -1,0 +1,32 @@
+.movie-card--container {
+  display: flex;
+}
+
+.movie-card--wrapper {
+  flex: 1 1 auto;
+  min-width: 300px;
+}
+
+/* MOVIE CARD HEADER */
+.movie-card--header {
+  padding: 0.5rem 0.25rem;
+}
+
+.movie-card--subtitle {
+  width: 295px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* MOVIE CARD CONTENT */
+.movie-card--content {
+  padding: 10px;
+  width: fit-content;
+  height: 100%;
+}
+
+.movie-img {
+  width: 100%;
+  height: 100%;
+}
