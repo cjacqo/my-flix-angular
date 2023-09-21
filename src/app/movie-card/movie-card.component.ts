@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { GenreDetailsComponent } from '../genre-details/genre-details.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie-card',
@@ -16,14 +17,19 @@ export class MovieCardComponent implements OnInit {
 
   constructor(
     public fetchApiData: FetchApiDataService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public router: Router
   ) { }
 
   ngOnInit(): void {
-    this.fetchDirectors()
-    this.fetchMovies()
-    this.fetchGenres()
-    this.userName = localStorage.getItem('user')
+    if (localStorage.getItem('user') && localStorage.getItem('token')) {
+      this.fetchDirectors()
+      this.fetchMovies()
+      this.fetchGenres()
+      this.userName = localStorage.getItem('user')
+    } else {
+      this.router.navigate(['welcome'])
+    }
   }
 
   fetchMovies(): void {
