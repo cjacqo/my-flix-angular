@@ -27,11 +27,4 @@ export class WelcomePageComponent {
       width: '280px'
     })
   }
-
-  // This function opens the movies dialog container
-  openMoviesDialog(): void {
-    this.dialog.open(MovieCardComponent, {
-      width: '500px'
-    })
-  }
 }

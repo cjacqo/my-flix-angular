@@ -1,0 +1,25 @@
+.main-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4rem;
+
+  .main-page--header {
+    text-align: center;
+
+    h1 {
+      font-size: 4rem;
+    }
+  }
+
+  .main-page--actions {
+    display: flex;
+    justify-content: space-around;
+    width: 15rem;
+
+    button {
+      text-transform: uppercase;
+    }
+  }
+}
