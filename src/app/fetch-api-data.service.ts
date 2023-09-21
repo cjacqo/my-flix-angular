@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { map } from 'rxjs/operators'
+import { map, mergeMap } from 'rxjs/operators'
 
 const apiUrl = 'https://list-o-movies-311c22237892.herokuapp.com/'
 
@@ -39,6 +39,24 @@ export class FetchApiDataService {
     )
   }
 
+  getAllMoviesTEST(): Observable<any> {
+    const token = localStorage.getItem('token')
+    return this.http.get(apiUrl + 'movies', {
+      headers: new HttpHeaders(
+        { Authorization: 'Bearer ' + token }
+      )
+    }).pipe(
+      map(this.extractResponseData)
+      // map((data: any) => {
+      //   data.forEach((m: any, i: number) => {
+      //     console.log(m.Directors)
+      //     console.log(i)
+      //   })
+      //   return data
+      // })
+    )
+  }
+
   getOneMovie(title: string): Observable<any> {
     const token = localStorage.getItem('token')
     return this.http.get(apiUrl + 'movies/' + title, {
@@ -51,9 +69,21 @@ export class FetchApiDataService {
     )
   }
 
+  getAllDirectors(): Observable<any> {
+    const token = localStorage.getItem('token')
+    return this.http.get(apiUrl + 'directors', {
+      headers: new HttpHeaders(
+        { Authorization: 'Bearer ' + token }
+      )
+    }).pipe(
+      map(this.extractResponseData),
+      catchError(this.handleError)
+    )
+  }
+
   getOneDirector(directorName: string): Observable<any> {
     const token = localStorage.getItem('token')
-    return this.http.get(apiUrl + 'movies/director/' + directorName, {
+    return this.http.get(apiUrl + 'directors/' + directorName, {
       headers: new HttpHeaders(
         { Authorization: 'Bearer ' + token }
       )

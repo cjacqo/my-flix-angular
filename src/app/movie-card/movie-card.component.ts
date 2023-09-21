@@ -7,18 +7,44 @@ import { FetchApiDataService } from '../fetch-api-data.service';
   styleUrls: ['./movie-card.component.scss']
 })
 export class MovieCardComponent {
+  directors: any[] = []
   movies: any[] = []
+
   constructor(public fetchApiData: FetchApiDataService) { }
 
   ngOnInit(): void {
-    this.getMovies()
+    this.fetchDirectors()
+    this.fetchMovies()
   }
 
-  getMovies(): void {
-    this.fetchApiData.getAllMovies().subscribe((resp: any) => {
+  fetchMovies(): void {
+    this.fetchApiData.getAllMoviesTEST().subscribe((resp: any) => {
       this.movies = resp
-      console.log(this.movies)
+      for (const movie of this.movies) {
+        this.findMoviesDirectors(movie)
+      }
       return this.movies
+    })
+  }
+
+  fetchDirectors(): void {
+    this.fetchApiData.getAllDirectors().subscribe((resp: any) => {
+      this.directors = resp
+      return this.directors
+    })
+  }
+
+  private findMoviesDirectors(movie: any): void {
+    let foundDirectors: any[] = []
+    movie.Directors.forEach((director: any) => {
+      foundDirectors.push(this.directors.find(d => d._id === director))
+    })
+    movie.Directors = foundDirectors
+  }
+
+  listDirectors(directors: any) {
+    return directors.map((director: any) => {
+      return director.Name
     })
   }
 }
