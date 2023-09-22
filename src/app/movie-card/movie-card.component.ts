@@ -28,7 +28,6 @@ export class MovieCardComponent implements OnInit {
       this.fetchMovies()
       this.fetchGenres()
       this.user = JSON.parse(localStorage.getItem('user')!)
-      console.log(this.user)
     } else {
       this.router.navigate(['welcome'])
     }
@@ -120,14 +119,14 @@ export class MovieCardComponent implements OnInit {
       this.fetchApiData
         .deleteFavoriteMovie(this.user.UserName, movieId)
         .subscribe((resp: any) => {
-          this.user.FavoriteMovies = resp
+          this.user.FavoriteMovies = this.user.FavoriteMovies.filter((id: String) => id !== movieId)
           localStorage.setItem('user', JSON.stringify(this.user))
         })
     } else {
       this.fetchApiData
         .addFavoriteMovie(this.user.UserName, movieId)
         .subscribe((resp: any) => {
-          this.user.FavoriteMovies = resp
+          this.user.FavoriteMovies.push(movieId)
           localStorage.setItem('user', JSON.stringify(this.user))
         })
     }

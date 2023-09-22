@@ -147,7 +147,8 @@ export class FetchApiDataService {
     })
 
     return this.http.post(apiUrl + 'users/' + userName + '/movies/' + movieId, null, {
-      headers
+      headers,
+      responseType: 'text'
     }).pipe(
       catchError(this.handleError)
     )
@@ -156,17 +157,14 @@ export class FetchApiDataService {
   deleteFavoriteMovie(userName: string, movieId: string): Observable<any> {
     const token = localStorage.getItem('token')
     const user = JSON.parse(localStorage.getItem('user') || '{}')
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + token
+    })
 
-    const index = user.FavoriteMovies.indexOf(movieId)
-    if (index >= 0) user.FavoriteMovies.splice(index, 1)
-    localStorage.setItem('user', JSON.stringify(user))
-
-    return this.http.delete(apiUrl + `users/${user.UserName}/${movieId}`, {
-      headers: new HttpHeaders(
-        { Authorization: 'Bearer ' + token }
-      )
+    return this.http.delete(apiUrl + 'users/' + userName + '/movies/' + movieId, {
+      headers,
+      responseType: 'text'
     }).pipe(
-      map(this.extractResponseData),
       catchError(this.handleError)
     )
   }
