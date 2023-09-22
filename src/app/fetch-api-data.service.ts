@@ -102,15 +102,13 @@ export class FetchApiDataService {
     return user
   }
 
-  editUser(updatedUser: any): Observable<any> {
-    const user = JSON.parse(localStorage.getItem('user') || '{}')
+  editUser(username: string, updatedUser: any): Observable<any> {
     const token = localStorage.getItem('token')
-    return this.http.put(apiUrl + 'users/' + user.UserName, updatedUser, {
+    return this.http.put(apiUrl + 'users/' + username, updatedUser, {
       headers: new HttpHeaders(
         { Authorization: 'Bearer ' + token }
       )
     }).pipe(
-      map(this.extractResponseData),
       catchError(this.handleError)
     )
   }
@@ -184,6 +182,7 @@ export class FetchApiDataService {
     if (error.error instanceof ErrorEvent) {
       console.error('Some error occurred:', error.error.message)
     } else {
+      console.log(error)
       console.error(
         `Error Status code ${error.status}, ` +
         `Error body is: ${error.error}`

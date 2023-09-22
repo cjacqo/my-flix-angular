@@ -24,20 +24,20 @@
       <form>
         <mat-form-field appearance="outline">
           <mat-label>Username</mat-label>
-          <input matInput [(ngModel)]="user.UserName" placeholder="Username" name="UserName" type="text">
+          <input matInput [(ngModel)]="updatedUser.UserName" placeholder="Username" name="UserName" type="text">
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Email</mat-label>
-          <input matInput [(ngModel)]="user.Email" placeholder="Email" name="Email" type="email">
+          <input matInput [(ngModel)]="updatedUser.Email" placeholder="Email" name="Email" type="email">
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Password</mat-label>
-          <input matInput [(ngModel)]="user.Password" placeholder="Password" name="Password" type="password">
+          <input matInput [(ngModel)]="updatedUser.Password" placeholder="Password" name="Password" type="password">
         </mat-form-field>
       </form>
 
       <div class="update-details--actions">
-        <button mat-stroked-button color="primary">Update</button>
+        <button mat-stroked-button (click)="updateUser()" color="primary">Update</button>
         <button mat-raised-button color="warn">Delete</button>
       </div>
     </div>
@@ -49,7 +49,9 @@
       <h1>Favorite Movies</h1>
     </div>
     <div class="user-favorite-movies--content">
-
+      <ul class="favorite-movies--list">
+        <li *ngFor="let movie of favoriteMovies">{{movie}}</li>
+      </ul>
     </div>
   </div>
 </div>
