@@ -49,9 +49,15 @@
       <h1>Favorite Movies</h1>
     </div>
     <div class="user-favorite-movies--content">
-      <ul class="favorite-movies--list">
-        <li *ngFor="let movie of favoriteMovies">{{movie}}</li>
-      </ul>
+      <mat-list class="favorite-movies--list" role="list">
+        <mat-list-item *ngFor="let movie of favoriteMovies" role="listitem">
+          <button mat-button [matMenuTriggerFor]="menu">{{movie.Title}}</button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="openMovieDetailsDialog(movie)">Details</button>
+            <button mat-menu-item (click)="removeFromFavoriteMovies(movie)">Remove from favorites</button>
+          </mat-menu>
+        </mat-list-item>
+      </mat-list>
     </div>
   </div>
 </div>
