@@ -56,6 +56,19 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
+  deleteUser(): void {
+    this.fetchApiData.deleteUser(this.user.UserName).subscribe((resp: any) => {
+      localStorage.removeItem('user')
+      localStorage.removeItem('token')
+      this.router.navigate(['welcome'])
+    }, result => {
+      console.log(result)
+      this.snackBar.open('Cannot delete user', 'OK', {
+        duration: 2000
+      })
+    })
+  }
+
   openMovieDetailsDialog(movie: any): void {
     this.dialog.closeAll()
     const dialogConfig = new MatDialogConfig()
