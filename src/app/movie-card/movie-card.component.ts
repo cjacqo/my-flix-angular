@@ -24,9 +24,13 @@ export class MovieCardComponent implements OnInit {
 
   ngOnInit(): void {
     if (localStorage.getItem('user') && localStorage.getItem('token')) {
-      this.fetchDirectors()
-      this.fetchMovies()
-      this.fetchGenres()
+      this.fetchApiData.getAllDirectors().subscribe((resp: any) => {
+        this.directors = resp
+        this.fetchApiData.getAllGenres().subscribe((resp: any) => {
+          this.genres = resp
+          this.fetchMovies()
+        })
+      })
       this.user = JSON.parse(localStorage.getItem('user')!)
     } else {
       this.router.navigate(['welcome'])
@@ -41,20 +45,6 @@ export class MovieCardComponent implements OnInit {
         this.findMoviesGenre(movie)
       }
       return this.movies
-    })
-  }
-
-  fetchDirectors(): void {
-    this.fetchApiData.getAllDirectors().subscribe((resp: any) => {
-      this.directors = resp
-      return this.directors
-    })
-  }
-
-  fetchGenres(): void {
-    this.fetchApiData.getAllGenres().subscribe((resp: any) => {
-      this.genres = resp
-      return this.genres
     })
   }
 
