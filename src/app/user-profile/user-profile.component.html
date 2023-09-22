@@ -1,6 +1,8 @@
 <app-navbar></app-navbar>
 
 <div class="user-profile--main">
+
+  <!-- USER DETAILS SECTION -->
   <div class="user-details--container">
     <div class="user-details--header">
       <h1>User Profile</h1>
@@ -10,6 +12,44 @@
       <p><b>Last Name:</b> {{user.LastName}}</p>
       <p><b>Username:</b> {{user.UserName}}</p>
       <p><b>Email:</b> {{user.Email}}</p>
+    </div>
+  </div>
+
+  <!-- UPDATE USER DETAILS SECTION -->
+  <div class="update-details--container">
+    <div class="update-details--header">
+      <h1>Update Profile</h1>
+    </div>
+    <div class="update-details-form--container">
+      <form>
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input matInput [(ngModel)]="user.UserName" placeholder="Username" name="UserName" type="text">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput [(ngModel)]="user.Email" placeholder="Email" name="Email" type="email">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput [(ngModel)]="user.Password" placeholder="Password" name="Password" type="password">
+        </mat-form-field>
+      </form>
+
+      <div class="update-details--actions">
+        <button mat-stroked-button color="primary">Update</button>
+        <button mat-raised-button color="warn">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAVORITE MOVIES -->
+  <div class="user-favorite-movies--container">
+    <div class="user-favorite-movies--header">
+      <h1>Favorite Movies</h1>
+    </div>
+    <div class="user-favorite-movies--content">
+
     </div>
   </div>
 </div>

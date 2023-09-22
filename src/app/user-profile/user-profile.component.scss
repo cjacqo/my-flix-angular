@@ -1,4 +1,27 @@
 .user-profile--main {
   width: 95%;
   margin: 7rem auto 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+}
+
+/* UPDATE DETAILS FORM */
+.update-details-form--container {
+  width: 50%;
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .update-details--actions {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+
+    button {
+      text-transform: uppercase;
+    }
+  }
 }
