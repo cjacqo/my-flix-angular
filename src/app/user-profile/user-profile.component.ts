@@ -32,6 +32,9 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
+  /**
+   * @returns the user's favorite movies list
+   */
   fetchFavoriteMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       const movies = resp
@@ -43,6 +46,9 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
+  /**
+   * updates the user's information on form submission
+   */
   updateUser(): void {
     this.fetchApiData.editUser(this.user.UserName, this.updatedUser).subscribe((resp: any) => {
       this.snackBar.open('Update Successful!', 'OK', {
@@ -56,6 +62,9 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
+  /**
+   * deletes the user's account and navigates the user back to the login/sign up page
+   */
   deleteUser(): void {
     this.fetchApiData.deleteUser(this.user.UserName).subscribe((resp: any) => {
       localStorage.removeItem('user')
@@ -69,6 +78,10 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
+  /**
+   * @param movie 
+   * will open a dialog with the selected movie's details
+   */
   openMovieDetailsDialog(movie: any): void {
     this.dialog.closeAll()
     const dialogConfig = new MatDialogConfig()
@@ -80,6 +93,10 @@ export class UserProfileComponent implements OnInit {
     this.dialog.open(InfoDialogBasicComponent, dialogConfig)
   }
 
+  /**
+   * @param movie 
+   * removes the selected movie from the user's favorite movies list
+   */
   removeFromFavoriteMovies(movie: any): void {
     if (this.user.FavoriteMovies.includes(movie._id)) {
       this.fetchApiData

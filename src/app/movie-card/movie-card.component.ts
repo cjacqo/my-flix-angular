@@ -37,6 +37,9 @@ export class MovieCardComponent implements OnInit {
     }
   }
 
+  /**
+   * @returns all movies
+   */
   fetchMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp
@@ -48,6 +51,10 @@ export class MovieCardComponent implements OnInit {
     })
   }
 
+  /**
+   * @param movie 
+   * @returns the movie's director
+   */
   private findMoviesDirectors(movie: any): void {
     let foundDirectors: any[] = []
     movie.Directors.forEach((director: any) => {
@@ -56,6 +63,10 @@ export class MovieCardComponent implements OnInit {
     movie.Directors = foundDirectors
   }
 
+  /**
+   * @param movie 
+   * @returns the movie's genre
+   */
   private findMoviesGenre(movie: any): void {
     let foundGenre: any
     foundGenre = this.genres.find(g => g._id === movie.Genre)
@@ -68,6 +79,10 @@ export class MovieCardComponent implements OnInit {
     })
   }
 
+  /**
+   * @param genre 
+   * the genre will be passed into the dialog when openend
+   */
   openGenreDialog(genre: any): void {
     this.dialog.closeAll()
     const dialogConfig = new MatDialogConfig()
@@ -79,6 +94,10 @@ export class MovieCardComponent implements OnInit {
     this.dialog.open(InfoDialogBasicComponent, dialogConfig)
   }
 
+  /**
+   * @param directors 
+   * the directors will be passed into the dialog when openend
+   */
   openDirectorsDialog(directors: any): void {
     this.dialog.closeAll()
     const dialogConfig = new MatDialogConfig()
@@ -92,6 +111,10 @@ export class MovieCardComponent implements OnInit {
     this.dialog.open(InfoDialogComponent, dialogConfig)
   }
 
+  /**
+   * @param description 
+   * param data will be passed into the dialog when opened
+   */
   openSynopsisDialog(description: any): void {
     this.dialog.closeAll()
     const dialogConfig = new MatDialogConfig()
@@ -103,6 +126,10 @@ export class MovieCardComponent implements OnInit {
     this.dialog.open(InfoDialogBasicComponent, dialogConfig)
   }
 
+  /**
+   * @param movieId 
+   * will set the selected movie as one of the user's favorites
+   */
   handleSetFavoriteMovie(movieId: string): void {
     if (this.user.FavoriteMovies.includes(movieId)) {
       this.fetchApiData

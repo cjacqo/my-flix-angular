@@ -21,6 +21,10 @@ export class UserLoginFormComponent implements OnInit {
 
   ngOnInit(): void { }
 
+  /**
+   * on login token, userdata, and UserName will be stored in localstorage.
+   * user will be sent to the movie page
+   */
   loginUser(): void {
     this.fetchApiData.userLogin(this.userData).subscribe(result => {
       localStorage.setItem('user', JSON.stringify(result.user))

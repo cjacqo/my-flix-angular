@@ -12,7 +12,9 @@ import { MatDialog } from '@angular/material/dialog';
 export class WelcomePageComponent {
   constructor(public dialog: MatDialog) { }
 
-  // This is the function that will open the dialog when the signup button is clicked
+  /**
+   * will open the dialog signup when the signup button is clicked
+   */
   openUserRegistrationDialog(): void {
     this.dialog.open(UserRegistrationFormComponent, {
       // Assigning the dialog a width
@@ -20,7 +22,9 @@ export class WelcomePageComponent {
     })
   };
 
-  // This is the function that will open the dialog when the login button is clicked
+  /**
+   * will open the dialog login when the login button is clicked
+   */
   openUserLoginDialog(): void {
     this.dialog.open(UserLoginFormComponent, {
       // Assigning the dialog a width
